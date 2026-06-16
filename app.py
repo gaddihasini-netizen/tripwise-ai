@@ -84,7 +84,7 @@ st.markdown("""
 
 # 2. Sidebar Questionnaire Form (Premium Destination Picker)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
-st.sidebar.title("🏝️ Itinerary Studio")
+st.sidebar.title("🏝 divorce Itinerary Studio")
 st.sidebar.markdown("Configure your custom destination metrics below.")
 
 # Specialized regional hubs dropdown
@@ -96,6 +96,8 @@ destination = st.sidebar.selectbox(
 col_d1, col_d2 = st.sidebar.columns(2)
 with col_d1:
     start_date = st.sidebar.date_input("📅 Start Date", datetime.date.today())
+with col2:
+    pass
 with col_d2:
     end_date = st.sidebar.date_input("📅 End Date", datetime.date.today() + datetime.timedelta(days=2))
 
@@ -248,6 +250,7 @@ if st.session_state.trip_ready and destination:
                 </li>
             </ul>
             
+            <!-- Core Feature: Local Insider Pro-Tips Customized Per Day Selection -->
             <div style="background-color:#fff7ed; border-left:4px solid #f97316; padding:14px; border-radius:8px; margin-top:12px; margin-bottom:30px;">
                 <span style="color:#7c2d12; font-weight:800; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px;">💡 Local Insider Pro-Tip:</span>
                 <p style="color:#9a3412; margin:4px 0 0 0; font-size:0.95rem;">{tips[(day - 1) % len(tips)]}</p>
@@ -280,14 +283,14 @@ if st.session_state.trip_ready and destination:
         # Premium Feature Simulation: Weather & Crowd Metrics
         st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>🌤️ Environmental Real-Time Indicators</h3>", unsafe_allow_html=True)
-        st.success(f" Anicipated Climate Conditions: {weather}")
+        st.success(f" Anticipated Climate Conditions: {weather}")
         st.warning(f" Local Traffic Footprint: {crowds}")
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Premium Feature Simulation: Document Export
         st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>📥 Document Export Vault</h3>", unsafe_allow_html=True)
-        st.download_button(label="📥 Download Full Offline Itinerary Plan (.txt)", data=f"TripWise Specialized Plan for {destination}", file_name=f"TripWise_{destination}.txt", mime="text/plain", use_container_width=True)
+        st.download_button(label="📥 Download Full Offline Itinerary Plan (.txt)", data=f"TripWise Plan for {destination}", file_name=f"TripWise_{destination}.txt", mime="text/plain", use_container_width=True)
         st.caption("📝 Project Note: Future updates can compile these data matrices into multi-page print-ready formal PDFs instantly.")
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -297,7 +300,7 @@ else:
         <div class="dashboard-card" style="border-left: 6px solid #f97316;">
             <h3 style="color: #1e3a8a; margin-top:0; font-size:1.6rem;">👑 Premium Destination Itinerary Workspace</h3>
             <p style="color: #4b5563; font-size: 1.1rem; line-height: 1.7;">
-                Welcome to your interactive travel planner. This workspace has been fully specialized to handle premium tourist circuits with deep precision accuracy. 
+                Welcome to your interactive travel planner. This workspace has been fully optimized to handle popular tourist circuits with deep precision accuracy. 
                 Use the configuration control panel on your left to choose your destination, trip dates (from 1 up to 10 days), and style targets. 
                 The system will instantly calculate high-fidelity daily schedules, custom insider secrets, and budget parameters formatted natively in <b>Indian Rupees (₹/INR)</b>!
             </p>
