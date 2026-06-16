@@ -133,8 +133,8 @@ if generate_btn and destination:
         weather = "Favorable seasonal parameters. Standard clear daytime sky conditions with comfortable evening temperature cooling cycles."
         crowds = "Moderate density lines around main city plazas between noon and late afternoon. Target early morning windows for completely clear photogenic frames."
 
-    # Dynamic Budget Calculation Matrices
-    base_modifier = 60 if budget == "Budget" else (145 if budget == "Standard" else 390)
+    # Dynamic Budget Calculation Matrices (Configured in Indian Rupees - INR)
+    base_modifier = 2500 if budget == "Budget" else (6500 if budget == "Standard" else 16000)
     total_val = duration * base_modifier * travelers
 
     left_side, right_side = st.columns([6, 4])
@@ -158,15 +158,15 @@ if generate_btn and destination:
             <ul>
                 <li><b>Morning (09:00 AM - 12:30 PM)</b>:<br>
                     <u>{spot_m['name']}</u> — {spot_m['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.2)}</span> | Duration: 3.5 Hours
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.15)}</span> | Duration: 3.5 Hours
                 </li><br>
                 <li><b>Afternoon (01:30 PM - 05:00 PM)</b>:<br>
                     <u>{spot_a['name']}</u> — {spot_a['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.4)}</span> | Duration: 3.5 Hours
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.25)}</span> | Duration: 3.5 Hours
                 </li><br>
                 <li><b>Evening (06:30 PM - 10:00 PM)</b>:<br>
                     <u>{spot_e['name']}</u> — {spot_e['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.25)}</span> | Duration: 3.5 Hours
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.20)}</span> | Duration: 3.5 Hours
                 </li>
             </ul>
             <hr style="border-color:#e2e8f0;">
@@ -183,14 +183,14 @@ if generate_btn and destination:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>📊 Budget Allocation Breakdown</h3>", unsafe_allow_html=True)
         
-        st.metric(label="Calculated Combined Itinerary Value", value=f"${total_val:,.2f}", delta=f"{budget} Configuration")
+        st.metric(label="Calculated Combined Itinerary Value (INR)", value=f"₹{total_val:,.2f}", delta=f"{budget} Configuration")
         
-        # Real Interactive Bar Chart Updates
+        # Real Interactive Bar Chart Updates using Indian Rupees
         chart_data = pd.DataFrame({
             'Expense Categories': ['Accommodation', 'Culinary & Food', 'Transit Systems', 'Activity Tickets'],
-            'Cost Allocations ($)': [total_val * 0.45, total_val * 0.25, total_val * 0.15, total_val * 0.15]
+            'Cost Allocations (₹)': [total_val * 0.45, total_val * 0.25, total_val * 0.15, total_val * 0.15]
         })
-        st.bar_chart(data=chart_data, x='Expense Categories', y='Cost Allocations ($)')
+        st.bar_chart(data=chart_data, x='Expense Categories', y='Cost Allocations (₹)')
         
         st.markdown("<hr style='border-color:#e2e8f0;'>", unsafe_allow_html=True)
         st.markdown("### 📸 Destination Photo Inspiration", unsafe_allow_html=True)
@@ -208,7 +208,7 @@ else:
             <p style="color: #475569; font-size:1.1rem; line-height:1.7;">
                 The travel workspace engine is now fully dynamic. Simply configure your desired target location, exact dates, 
                 group count, and travel parameters on the deep-indigo command center to your left. 
-                The system will automatically run full layout logic loops mapping out <b>as many days as you choose</b> instantly!
+                The system will automatically run full layout logic loops mapping out <b>as many days as you choose</b> instantly, tracked smoothly in <b>Indian Rupees (₹)</b>!
             </p>
             <div style="display: flex; gap: 15px; margin-top: 30px; justify-content: space-between; flex-wrap: wrap;">
                 <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover;">
