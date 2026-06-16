@@ -2,38 +2,30 @@ import streamlit as st
 import datetime
 import pandas as pd
 
-# 1. Force Page Refresh Configurations
+# 1. Page Configuration
 st.set_page_config(
-    page_title="TripWise AI - Travel Planner",
+    page_title="TripWise AI - Ultimate Travel Workspace",
     page_icon="✈️",
     layout="wide"
 )
 
-# Reset session states cleanly
-if "trip_ready" not in st.session_state:
-    st.session_state.trip_ready = False
-
-# --- ULTRA-COLOURFUL BRIGHT THEME OVERRIDE ---
+# --- PREMIUM DYNAMIC THEME OVERRIDE ---
 st.markdown("""
     <style>
-    /* Vibrant Full Page Background Gradient */
     .stApp {
         background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #fce7f3 100%) !important;
     }
-    
-    /* Bright Pop Sidebar Styling */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%) !important;
         box-shadow: 5px 0px 15px rgba(0,0,0,0.2);
     }
-    
-    /* Sidebar Text Highlights */
     [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] label, [data-testid="stSidebar"] p {
         color: #ffffff !important;
         font-weight: 700 !important;
     }
-    
-    /* Neon Glowing Main Title */
+    [data-testid="stSidebar"] input, [data-testid="stSidebar"] select, [data-testid="stSidebar"] div[data-baseweb="select"] * {
+        color: #111827 !important;
+    }
     .super-title {
         font-size: 3.8rem !important;
         font-weight: 900 !important;
@@ -43,15 +35,12 @@ st.markdown("""
         letter-spacing: -1px;
         margin-bottom: 0px;
     }
-    
     .subtitle {
         font-size: 1.3rem;
         color: #475569;
         font-weight: 500;
         margin-bottom: 30px;
     }
-
-    /* Vibrant Pink/Orange Fire Action Button */
     .stButton>button {
         background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%) !important;
         color: white !important;
@@ -61,14 +50,11 @@ st.markdown("""
         font-weight: 800 !important;
         border-radius: 50px !important;
         box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4) !important;
-        cursor: pointer;
         transition: transform 0.2s ease;
     }
     .stButton>button:hover {
         transform: scale(1.03) translateY(-2px);
     }
-    
-    /* Clean Content Visual Cards */
     .glass-card {
         background: rgba(255, 255, 255, 0.95) !important;
         border-radius: 24px !important;
@@ -80,10 +66,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. Control Input Sidebar
+# 2. Sidebar Control Input Panel
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 st.sidebar.title("🏝️ TripWise Studio")
-st.sidebar.markdown("Set your customized escape matrices below.")
+st.sidebar.markdown("Configure your trip logistics.")
 
 destination = st.sidebar.text_input("📍 Destination Location", value="Goa")
 
@@ -91,7 +77,7 @@ col1, col2 = st.sidebar.columns(2)
 with col1:
     start_date = st.sidebar.date_input("📅 Start Date", datetime.date.today())
 with col2:
-    end_date = st.sidebar.date_input("📅 End Date", datetime.date.today() + datetime.timedelta(days=3))
+    end_date = st.sidebar.date_input("📅 End Date", datetime.date.today() + datetime.timedelta(days=2))
 
 budget = st.sidebar.selectbox("💰 Budget Category", ["Budget", "Standard", "Premium"])
 style = st.sidebar.selectbox("🏖️ Travel Style", ["Adventure", "Cultural", "Nature", "Luxury", "Family"])
@@ -100,46 +86,96 @@ travelers = st.sidebar.number_input("👥 Travelers Group Size", min_value=1, va
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 generate_btn = st.sidebar.button("✨ Click to Build Instantly!", use_container_width=True)
 
-if generate_btn:
-    st.session_state.trip_ready = True
+# Process Exact Selected Duration
+duration = (end_date - start_date).days + 1
+if duration <= 0:
+    duration = 1
 
-# 3. Main Stage Content View Screen
+# 3. Main Dashboard Rendering Layout
 st.markdown('<h1 class="super-title">✈️ TripWise AI Master</h1>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Your ultimate interactive visual dream getaway matrix workspace.</p>', unsafe_allow_html=True)
 
-if st.session_state.trip_ready and destination:
-    duration = (end_date - start_date).days + 1
-    if duration <= 0:
-        duration = 3
-        
-    mult = 70 if budget == "Budget" else (160 if budget == "Standard" else 400)
-    total_val = duration * mult * travelers
+if generate_btn and destination:
+    # High Fidelity Real-World Location Database Blueprint Mapping
+    loc_clean = destination.strip().lower()
+    
+    if "goa" in loc_clean:
+        spots = [
+            {"name": "Calangute Beach & Water Trails", "desc": "Parasailing, jet skiing, and high-speed banana boat rides along the vibrant coastline."},
+            {"name": "Basilica of Bom Jesus", "desc": "UNESCO World Heritage site showcasing stunning baroque architecture and deep rich history."},
+            {"name": "Dudhsagar Waterfalls", "desc": "A majestic four-tiered white-water cascading wonder nestled in rich deciduous forests."},
+            {"name": "Fontainhas Latin Quarter", "desc": "Walking trails through narrow winding streets lined with bright, colorful Portuguese villas."},
+            {"name": "Anjuna Flea Market & Coastline Walk", "desc": "Vibrant bohemian street shopping, handicrafts, and live musical food shacks."},
+            {"name": "Fort Aguada", "desc": "Seventeenth-century historical lighthouse fortress providing panoramic ocean viewscapes."}
+        ]
+        weather = "Tropical climate. Sunny coastal visibility with soft sea breezes. Peak outdoor comfort ranges from 7:00 AM to 11:00 AM and 4:30 PM to 8:00 PM."
+        crowds = "High density patterns around famous north coast beaches between 2:00 PM and 6:30 PM. Visit historical heritage churches at opening hours to bypass tours."
+    elif "pari" in loc_clean:
+        spots = [
+            {"name": "Eiffel Tower & Champ de Mars", "desc": "Iconic landmark observation deck experience paired with scenic green lawns."},
+            {"name": "Louvre Museum Galleries", "desc": "Immense historical palace displaying world-class art masterpieces and relics."},
+            {"name": "Montmartre & Sacré-Cœur", "desc": "Charming hilltop artist village paths leading to magnificent structural city views."},
+            {"name": "Seine River Cruise Network", "desc": "Relaxing architectural historic boat transit highlighting iconic bridges and exhibits."},
+            {"name": "Palace of Versailles", "desc": "Grand royal gardens, hall of mirrors, and luxury historical estate walking circuits."},
+            {"name": "Musée d'Orsay", "desc": "Stunning historic railway station housing massive collections of legendary impressionist art."}
+        ]
+        weather = "Mild maritime conditions. Perfect afternoon walking visibility. Always pack a lightweight windbreaker layer and a portable compact umbrella."
+        crowds = "Massive waiting lines across central art hubs between 11:00 AM and 3:30 PM. Pre-book skip-the-line museum tickets online weeks in advance."
+    else:
+        # Generic Custom Dynamic Generation Fallback Engine
+        spots = [
+            {"name": f"Central {destination} Discovery Hub", "desc": "Immersive local exploration circuit uncovering core landmarks and community heritage."},
+            {"name": f"Historic {destination} Landmark Trail", "desc": "Guided walking tour detailing architectural transformations and local storytelling."},
+            {"name": f"Scenic {destination} Panoramic Outlook", "desc": "Stunning natural vista point perfect for afternoon photography and landscape treks."},
+            {"name": f"The Local {destination} Arts Market", "desc": "Charming street bazaar featuring artisanal culinary treats, crafts, and live displays."},
+            {"name": f"Hidden {destination} Nature Reserve", "desc": "Tranquil outdoor sanctuary containing curated wildlife trails and relaxing pathways."}
+        ]
+        weather = "Favorable seasonal parameters. Standard clear daytime sky conditions with comfortable evening temperature cooling cycles."
+        crowds = "Moderate density lines around main city plazas between noon and late afternoon. Target early morning windows for completely clear photogenic frames."
 
-    # Dynamic Layout Split
+    # Dynamic Budget Calculation Matrices
+    base_modifier = 60 if budget == "Budget" else (145 if budget == "Standard" else 390)
+    total_val = duration * base_modifier * travelers
+
     left_side, right_side = st.columns([6, 4])
     
     with left_side:
         st.markdown(f"""
         <div class="glass-card">
             <h2 style="color:#1e3a8a; margin-top:0;">📋 Custom Day-by-Day Agenda: {destination}</h2>
-            <p><i>Generated seamlessly for <b>{travelers} travelers</b> looking for a <b>{style}</b> timeline.</i></p>
+            <p><i>Generated seamlessly for **{travelers} travelers** pursuing a **{style}** itinerary across **{duration} Days**.</i></p>
             <hr style="border-color:#e2e8f0;">
-            <h3>🌅 Day 1: Perfect Arrival & Kickoff</h3>
+        """, unsafe_allow_html=True)
+        
+        # DYNAMIC DAY LOOP GENERATION (Builds out exact duration user inputs)
+        for d in range(1, duration + 1):
+            spot_m = spots[(d * 3 - 3) % len(spots)]
+            spot_a = spots[(d * 3 - 2) % len(spots)]
+            spot_e = spots[(d * 3 - 1) % len(spots)]
+            
+            st.markdown(f"""
+            <h3 style="color:#8b5cf6;">🌅 Day {d}: Premium {style} Track</h3>
             <ul>
-                <li><b>Morning</b>: Explore historic local architecture districts and morning markets. (Est. ${int(mult*0.2)})</li>
-                <li><b>Afternoon</b>: Move out on a specialized <b>{style}</b> tour across central beachways or paths. (Est. ${int(mult*0.3)})</li>
-                <li><b>Evening</b>: Dinner at a beach shacks/bazaars with authentic local food pairings. (Est. ${int(mult*0.15)})</li>
-            </ul>
-            <h3>☀️ Day 2: Peak Exploration Trails</h3>
-            <ul>
-                <li><b>Morning</b>: Sunrise trek/coastal walk before density levels surge up. (Est. ${int(mult*0.1)})</li>
-                <li><b>Afternoon</b>: Guided local excursions, water trails, or museum entries. (Est. ${int(mult*0.4)})</li>
-                <li><b>Evening</b>: Premium sunset cruise / observation points and lounge markets. (Est. ${int(mult*0.2)})</li>
+                <li><b>Morning (09:00 AM - 12:30 PM)</b>:<br>
+                    <u>{spot_m['name']}</u> — {spot_m['desc']}<br>
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.2)}</span> | Duration: 3.5 Hours
+                </li><br>
+                <li><b>Afternoon (01:30 PM - 05:00 PM)</b>:<br>
+                    <u>{spot_a['name']}</u> — {spot_a['desc']}<br>
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.4)}</span> | Duration: 3.5 Hours
+                </li><br>
+                <li><b>Evening (06:30 PM - 10:00 PM)</b>:<br>
+                    <u>{spot_e['name']}</u> — {spot_e['desc']}<br>
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ${int(base_modifier*0.25)}</span> | Duration: 3.5 Hours
+                </li>
             </ul>
             <hr style="border-color:#e2e8f0;">
-            <h3>⛅ Weather & Crowds Summary</h3>
-            <p><b>Expected Climate</b>: Clean skies, warm afternoon sun, soft breeze tracks.</p>
-            <p><b>Crowd Management Track</b>: High concentration zones between 1:00 PM and 4:00 PM. Move early to bypass long registration lines.</p>
+            """, unsafe_allow_html=True)
+            
+        st.markdown(f"""
+            <h3 style="color:#f97316;">☀️ Climate & Crowd Tracking Insights</h3>
+            <p><b>Real-Life Weather Advice</b>: {weather}</p>
+            <p><b>Peak Crowd Analysis</b>: {crowds}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -147,37 +183,37 @@ if st.session_state.trip_ready and destination:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>📊 Budget Allocation Breakdown</h3>", unsafe_allow_html=True)
         
-        # Display Metric Cards
-        st.metric(label="Calculated Profile Total Expense", value=f"${total_val:,.2f}", delta=f"{budget} Status")
+        st.metric(label="Calculated Combined Itinerary Value", value=f"${total_val:,.2f}", delta=f"{budget} Configuration")
         
-        # Create Native Streamlit Interactive Bar Chart
+        # Real Interactive Bar Chart Updates
         chart_data = pd.DataFrame({
-            'Expense Streams': ['Hotel Stay', 'Culinary Routes', 'Transit Logistics', 'Adventures'],
-            'Cost Allocations ($)': [total_val * 0.40, total_val * 0.25, total_val * 0.15, total_val * 0.20]
+            'Expense Categories': ['Accommodation', 'Culinary & Food', 'Transit Systems', 'Activity Tickets'],
+            'Cost Allocations ($)': [total_val * 0.45, total_val * 0.25, total_val * 0.15, total_val * 0.15]
         })
-        st.bar_chart(data=chart_data, x='Expense Streams', y='Cost Allocations ($)')
+        st.bar_chart(data=chart_data, x='Expense Categories', y='Cost Allocations ($)')
         
         st.markdown("<hr style='border-color:#e2e8f0;'>", unsafe_allow_html=True)
-        st.markdown("### 📸 Visual Exploration Capture", unsafe_allow_html=True)
-        # Display dynamic high-res gorgeous travel imagery matching the traveler profile style
-        img_src = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" if style != "Nature" else "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=600"
-        st.image(img_src, caption=f"Dynamic background view matching a {style} vacation profile.", use_container_width=True)
+        st.markdown("### 📸 Destination Photo Inspiration", unsafe_allow_html=True)
+        
+        # Match dynamic landscape imagery to destination
+        img_src = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600" if "goa" in loc_clean else ("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600" if "pari" in loc_clean else "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600")
+        st.image(img_src, caption=f"Dynamic background snapshot matching your customized trip layout.", use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
 else:
-    # High-impact, colorful welcoming splash layout cards
+    # High-impact welcoming workspace presentation screen
     st.markdown("""
         <div class="glass-card">
             <h2 style="color: #1e3a8a; margin-top:0; font-size:1.8rem;">🏝️ Welcome to Your Premium Master Travel Space</h2>
             <p style="color: #475569; font-size:1.1rem; line-height:1.7;">
-                The backend parameters are updated completely. No external authentications or API keys are required. 
-                Simply input your vacation criteria inside the custom deep-indigo workspace block on the left panel, 
-                then press <b>Click to Build Instantly</b> to render gorgeous schedules and data graphs live!
+                The travel workspace engine is now fully dynamic. Simply configure your desired target location, exact dates, 
+                group count, and travel parameters on the deep-indigo command center to your left. 
+                The system will automatically run full layout logic loops mapping out <b>as many days as you choose</b> instantly!
             </p>
             <div style="display: flex; gap: 15px; margin-top: 30px; justify-content: space-between; flex-wrap: wrap;">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
-                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
-                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover;">
             </div>
         </div>
     """, unsafe_allow_html=True)
