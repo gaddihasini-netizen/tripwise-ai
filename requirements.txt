@@ -1,5 +1,5 @@
-```txt
 streamlit
+openai
 pandas
 plotly
-```
+fpdf2
