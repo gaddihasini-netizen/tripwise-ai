@@ -203,7 +203,7 @@ if generate_btn and destination:
         """, unsafe_allow_html=True)
         
     with right_side:
-        # Core Feature Addition: Global Booking Gateway Panel
+        # Global Booking Gateway Panel
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>⚡ Express Booking Gateway</h3>", unsafe_allow_html=True)
         st.caption("Secure your major fleet logistics and hospitality stays instantly.")
