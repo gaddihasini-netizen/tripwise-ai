@@ -63,6 +63,26 @@ st.markdown("""
         border: 2px solid #ffffff !important;
         margin-bottom: 25px;
     }
+    
+    /* Booking Link Quick Badges */
+    .booking-pill {
+        display: inline-block;
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
+        color: white !important;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-decoration: none !important;
+        margin-top: 5px;
+        margin-right: 8px;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+        transition: all 0.2s ease;
+    }
+    .booking-pill:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -156,17 +176,20 @@ if generate_btn and destination:
             st.markdown(f"""
             <h3 style="color:#8b5cf6;">🌅 Day {d}: Premium {style} Track</h3>
             <ul>
-                <li><b>Morning (09:00 AM - 12:30 PM)</b>:<br>
+                <li style="margin-bottom: 15px;"><b>Morning (09:00 AM - 12:30 PM)</b>:<br>
                     <u>{spot_m['name']}</u> — {spot_m['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.15)}</span> | Duration: 3.5 Hours
-                </li><br>
-                <li><b>Afternoon (01:30 PM - 05:00 PM)</b>:<br>
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.15)}</span> | Duration: 3.5 Hours<br>
+                    <a class="booking-pill" href="https://www.google.com/search?q=book+entry+tickets+for+{spot_m['name'].replace(' ', '+')}" target="_blank">🎟️ Instant Pass Booking</a>
+                </li>
+                <li style="margin-bottom: 15px;"><b>Afternoon (01:30 PM - 05:00 PM)</b>:<br>
                     <u>{spot_a['name']}</u> — {spot_a['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.25)}</span> | Duration: 3.5 Hours
-                </li><br>
-                <li><b>Evening (06:30 PM - 10:00 PM)</b>:<br>
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.25)}</span> | Duration: 3.5 Hours<br>
+                    <a class="booking-pill" href="https://www.google.com/search?q=reserve+tours+for+{spot_a['name'].replace(' ', '+')}" target="_blank">🧗 Reserve Activity Ride</a>
+                </li>
+                <li style="margin-bottom: 15px;"><b>Evening (06:30 PM - 10:00 PM)</b>:<br>
                     <u>{spot_e['name']}</u> — {spot_e['desc']}<br>
-                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.20)}</span> | Duration: 3.5 Hours
+                    <span style="color:#10b981; font-weight:600;">Est. Cost: ₹{int(base_modifier*0.20)}</span> | Duration: 3.5 Hours<br>
+                    <a class="booking-pill" href="https://www.google.com/search?q=top+restaurants+near+{spot_e['name'].replace(' ', '+')}" target="_blank">🍲 Book Dining Table</a>
                 </li>
             </ul>
             <hr style="border-color:#e2e8f0;">
@@ -180,6 +203,18 @@ if generate_btn and destination:
         """, unsafe_allow_html=True)
         
     with right_side:
+        # Core Feature Addition: Global Booking Gateway Panel
+        st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+        st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>⚡ Express Booking Gateway</h3>", unsafe_allow_html=True)
+        st.caption("Secure your major fleet logistics and hospitality stays instantly.")
+        
+        book_col1, book_col2 = st.columns(2)
+        with book_col1:
+            st.markdown(f'<a class="booking-pill" style="display:block; text-align:center; padding:10px;" href="https://www.google.com/search?q=flights+to+{destination}" target="_blank">✈️ Book Roundtrip Flights</a>', unsafe_allow_html=True)
+        with book_col2:
+            st.markdown(f'<a class="booking-pill" style="display:block; text-align:center; padding:10px; background:linear-gradient(90deg, #ec4899, #f43f5e);" href="https://www.google.com/search?q=best+hotels+stay+in+{destination}" target="_blank">🏨 Book Luxury Stays</a>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
         st.markdown("<h3 style='margin-top:0; color:#1e3a8a;'>📊 Budget Allocation Breakdown</h3>", unsafe_allow_html=True)
         
@@ -208,7 +243,7 @@ else:
             <p style="color: #475569; font-size:1.1rem; line-height:1.7;">
                 The travel workspace engine is now fully dynamic. Simply configure your desired target location, exact dates, 
                 group count, and travel parameters on the deep-indigo command center to your left. 
-                The system will automatically run full layout logic loops mapping out <b>as many days as you choose</b> instantly, tracked smoothly in <b>Indian Rupees (₹)</b>!
+                The system will automatically run full layout logic loops mapping out <b>as many days as you choose</b> instantly, tracked smoothly in <b>Indian Rupees (₹)</b> with built-in instant direct booking shortcuts!
             </p>
             <div style="display: flex; gap: 15px; margin-top: 30px; justify-content: space-between; flex-wrap: wrap;">
                 <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400" style="width: 31%; border-radius:16px; height:180px; object-fit:cover;">
